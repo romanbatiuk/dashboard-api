@@ -1,9 +1,14 @@
 import { App } from './app';
 import { LoggerService } from './logger/logger.service';
 
-async function bootstrap() {
-  const app = new App(new LoggerService());
-  await app.init();
+export interface IBootstrapReturn {
+	app: App;
 }
 
-bootstrap();
+function bootstrap(): IBootstrapReturn {
+	const app = new App(new LoggerService());
+	app.init();
+	return { app };
+}
+
+export const { app } = bootstrap();
